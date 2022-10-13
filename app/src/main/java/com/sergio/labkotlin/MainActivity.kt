@@ -23,14 +23,22 @@ class MainActivity : AppCompatActivity() {
         btnDado.setOnClickListener {
             val valorRandom = numeroDadoRandom()
             tvResultado.setText(valorRandom.toString())
+
+            registrarPendiente("Mostrar imagen con el número que salió en el dado")
+
         }
 
         btnGenrala.setOnClickListener {
-            var resultado = "-"
+            var lista = mutableListOf<Int>()
             for (i in 1..5){
-                resultado += numeroDadoRandom().toString()+"-"
+                lista.add(numeroDadoRandom())
             }
-            tvResultado.setText(resultado) //Va a mostrar 5 números random entre 1 y 5
+            tvResultado.setText(lista.toString()) //Va a mostrar 5 números random entre 1 y 5, en formato lista
+
+            lista.intercambiarElementos(0, 4) //Intrercambio entre si los elementos de la posicion 0 y 4 de la lista
+
+            mensajeCorto(lista.toString()) //Muestro la lista con los valores de los extremos intercambiados
+
         }
 
         btnQuienArranca.setOnClickListener {
@@ -42,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             }
             tvResultado.setText(resultado)
 
-            Toast.makeText(this, "A jugar...", Toast.LENGTH_SHORT).show()
+            mensajeCorto("A jugar...")
 
         }
 
